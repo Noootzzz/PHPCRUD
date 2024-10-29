@@ -2,9 +2,9 @@
 
 session_start();
 
-if(!isset($_SESSION['csrf_article_add']) || empty($_SESSION['csrf_article_add']))
+if(!isset($_SESSION['csrf']) || empty($_SESSION['csrf']))
 {
-    $_SESSION['csrf_article_add'] = bin2hex(random_bytes(32));
+    $_SESSION['csrf'] = bin2hex(random_bytes(32));
 }
 
 ?>
@@ -28,9 +28,9 @@ if(!isset($_SESSION['csrf_article_add']) || empty($_SESSION['csrf_article_add'])
             <input type="text" name="email" id="email" placeholder="exemple@gmail.com">
             <br>
             <label for="psw">Mot de passe : </label>
-            <input type="text" name="psw" id="psw" placeholder="...........................">
+            <input type="password" name="psw" id="psw" placeholder="...........................">
             <br>
-            <input type="hidden" name="token" value="<?= $_SESSION['csrf_article_add']; ?>">
+            <input type="hidden" name="token" value="<?= $_SESSION['csrf']; ?>">
             <button type="submit">S'inscrire</button>
         </form>
     </div>
@@ -44,7 +44,7 @@ if(!isset($_SESSION['csrf_article_add']) || empty($_SESSION['csrf_article_add'])
             <label for="psw">Mot de passe : </label>
             <input type="text" name="psw" id="psw" placeholder="...........................">
             <br>
-            <input type="hidden" name="token" value="<?= $_SESSION['csrf_article_add']; ?>">
+            <input type="hidden" name="token" value="<?= $_SESSION['csrf']; ?>">
             <button type="submit">S'inscrire</button>
         </form>
     </div>
