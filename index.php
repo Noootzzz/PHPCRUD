@@ -17,18 +17,36 @@ if(!isset($_SESSION['csrf_article_add']) || empty($_SESSION['csrf_article_add'])
     <title>Inscription/Connexion</title>
 </head>
 <body>
-    <form action="register.php" method="POST">
-        <label for="name">Nom : </label>
-        <input type="text" name="name" id="name" placeholder="Nathan">
-        <br>
-        <label for="name">Email : </label>
-        <input type="text" name="name" id="name" placeholder="exemple@gmail.com">
-        <br>
-        <label for="name">Mot de passe : </label>
-        <input type="text" name="name" id="name" placeholder="...........................">
-        <br>
-        <label for="description">Description : </label>
-        <textarea name="description" id="description" rows="5" cols="30"></textarea>
-    </form>
+    <!-- FORMULAIRE D'INSCRIPTION -->
+    <div id="inscription-form">
+        <h2>S'inscrire</h2>
+        <form action="register.php" method="POST">
+            <label for="pseudo">Nom : </label>
+            <input type="text" name="pseudo" id="pseudo" placeholder="Nathan">
+            <br>
+            <label for="email">Email : </label>
+            <input type="text" name="email" id="email" placeholder="exemple@gmail.com">
+            <br>
+            <label for="psw">Mot de passe : </label>
+            <input type="text" name="psw" id="psw" placeholder="...........................">
+            <br>
+            <input type="hidden" name="token" value="<?= $_SESSION['csrf_article_add']; ?>">
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+    <!-- FORMULAIRE DE CONNEXION -->
+    <div id="connexion-form">
+        <h2>Se connecter</h2>
+        <form action="login.php" method="POST">
+            <label for="email">Email : </label>
+            <input type="text" name="email" id="email" placeholder="exemple@gmail.com">
+            <br>
+            <label for="psw">Mot de passe : </label>
+            <input type="text" name="psw" id="psw" placeholder="...........................">
+            <br>
+            <input type="hidden" name="token" value="<?= $_SESSION['csrf_article_add']; ?>">
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
 </body>
 </html>
