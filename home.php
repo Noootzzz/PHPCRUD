@@ -39,6 +39,10 @@ if(!isset($_SESSION['csrf']) || empty($_SESSION['csrf']))
     </header>
     <main>
 
+        <div>
+            <p><?= htmlspecialchars($_SESSION['content']); ?></p>
+        </div>
+
         <form action="messages.php" method="POST" id="messages-form">
             <input type="text" name="content" id="content" placeholder="Envoyer un message">
             <input type="hidden" name="token" value="<?= $_SESSION['csrf']; ?>">
