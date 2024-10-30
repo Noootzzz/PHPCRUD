@@ -64,3 +64,32 @@ main {
     padding: 1rem;
     border-radius: 10px;
 }
+
+#messages-form{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+}
+#messages-form input[type="text"]{
+    width: 90%;
+    height: 5rem;
+    font-size: 1.2em;
+    padding: 0 1rem;
+}
+#messages-form input[type="submit"]{
+    width: 10%;
+    height: 5rem;
+    border: none;
+    background-color: #111827;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #111827;
+    font-size: 1.2em;
+    padding: 0 1rem;
+    transition: .2s;
+}
+#messages-form input[type="submit"]:hover{
+    background-color: #111;
+}

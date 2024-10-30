@@ -8,6 +8,12 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
+// Générer le CSRF token si besoin
+if(!isset($_SESSION['csrf']) || empty($_SESSION['csrf']))
+{
+    $_SESSION['csrf'] = bin2hex(random_bytes(32));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +39,11 @@ if (!isset($_SESSION['id'])) {
     </header>
     <main>
 
-        
+        <form action="messages.php" method="POST" id="messages-form">
+            <input type="text" name="content" id="content" placeholder="Envoyer un message">
+            <input type="hidden" name="token" value="<?= $_SESSION['csrf']; ?>">
+            <input type="submit" value="Envoyer">
+        </form>
 
     </main>
 </body>
