@@ -57,6 +57,12 @@ if(isset($pseudo) && isset($email) && isset($hashedPsw))
     
     require_once 'bdd.php';
 
+    // Vérifiez que la connexion à la bdd
+    if (!isset($connexion) || $connexion === null) {
+        header("Location: index.php");
+        die("Erreur : connexion à la base de données non établie.");
+    }
+
     // Check si l'user existe déjà avec le pseudo et email
     $checkUser = $connexion->prepare(
         'SELECT id FROM users WHERE pseudo = :pseudo OR email = :email'
@@ -82,10 +88,10 @@ if(isset($pseudo) && isset($email) && isset($hashedPsw))
         ]);
 
         if ($sauvegarde->rowCount() > 0) {
-            $_SESSION['message'] = "Vous êtes bien inscrit.";
             $_SESSION['id'] = $connexion->lastInsertId(); // Récupère l'id de l'utilisateur créé
             $_SESSION['pseudo'] = $pseudo;
             $_SESSION['email'] = $email;
+            $_SESSION['home-message'] = "Vous êtes bien inscrit $pseudo.";
             // Redirection vers la page d'accueil
             header("Location:home.php");
             exit();
