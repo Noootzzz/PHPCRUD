@@ -56,22 +56,30 @@ if ($getMessagesInfos->rowCount() > 0) {
     </header>
     <main>
 
-        <div>
-            <?php foreach ($messages as $message) {echo '<p>'. 
-                $message['content']. '<br>Écrit par '. 
-                $message['pseudo'].' le '. 
-                $message['date_time']. '</p>';
+    <div>
+        <?php foreach ($messages as $message) {
+            echo '<p>' . 
+                $message['content'] . '<br>Écrit par ' . 
+                $message['pseudo'] . ' le ' . 
+                $message['date_time'] . '</p>';
             
-                 // Si admin
-                 if($_SESSION['is_admin'] == 1){
-                    // Ajouter un bouton pour modifier le message
-                    echo '<a href="edit_message.php?id='. $message['id']. '" id="edit-message">Modifier</a>';
-                    // Ajouter un bouton pour supprimer le message
-                    echo '<a href="delete_message.php?id='. $message['id']. '" id="delete-message">Supprimer</a>';                    
-                }
-            } 
-            ?>
-        </div>
+            // Si admin
+            if ($_SESSION['is_admin'] == 1) {
+                // Ajouter un bouton pour modifier le message
+                echo '<form action="update.php" method="POST" style="display:inline;">
+                        <input type="hidden" name="id_message" value="' . $message["id_message"] . '">
+                        <button type="submit">Modifier</button>
+                    </form>';
+                
+                // Ajouter un formulaire pour supprimer le message
+                echo '<form action="delete.php" method="POST" style="display:inline;">
+                        <input type="hidden" name="id_message" value="' . $message["id_message"] . '">
+                        <button type="submit">Supprimer</button>
+                    </form>';
+            }
+        } 
+        ?>
+    </div>
 
         <form action="messages.php" method="POST" id="messages-form">
             <input type="text" name="content" id="content" placeholder="Envoyer un message" autofocus>
