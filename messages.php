@@ -28,6 +28,11 @@ if(isset($content) && !empty($content))
     //Pas d'erreur, on sauvegarde en BDD
     require_once 'bdd.php';
 
+    // Vérifiez la connexion à la bdd
+    if (!isset($connexion) || $connexion === null) {
+        die("Erreur : connexion à la base de données non établie.");
+    }
+
     // Insertion du commentaire dans la base de données
     $insertion = $connexion->prepare(
         'INSERT INTO messages (content, id_user)
@@ -38,17 +43,11 @@ if(isset($content) && !empty($content))
         'id_user' => $_SESSION['id']
     ]);
 
+    header("Location:home.php");
 } else {
+    header("Location:home.php");
     die("<p>Erreur lors de l'ajout du contenu dans la BDD</p>");
 }
 
 
 
-
-
-
-
-
-
-
-header("Location:home.php");

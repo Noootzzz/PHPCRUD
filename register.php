@@ -57,7 +57,7 @@ if(isset($pseudo) && isset($email) && isset($hashedPsw))
     
     require_once 'bdd.php';
 
-    // Vérifiez que la connexion à la bdd
+    // Vérifiez la connexion à la bdd
     if (!isset($connexion) || $connexion === null) {
         header("Location: index.php");
         die("Erreur : connexion à la base de données non établie.");

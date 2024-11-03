@@ -32,7 +32,7 @@ if(isset($pseudo) && isset($plainPsw))
     //Pas d'erreur, on sauvegarde en BDD
     require_once 'bdd.php';
 
-    // Vérifiez que la connexion à la bdd
+    // Vérifiez la connexion à la bdd
     if (!isset($connexion) || $connexion === null) {
         die("Erreur : connexion à la base de données non établie.");
     }
