@@ -66,10 +66,7 @@ if ($getMessagesInfos->rowCount() > 0) {
             // Si admin
             if ($_SESSION['is_admin'] == 1) {
                 // Ajouter un bouton pour modifier le message
-                echo '<form action="update.php" method="POST" style="display:inline;">
-                        <input type="hidden" name="id_message" value="' . $message["id_message"] . '">
-                        <button type="submit">Modifier</button>
-                    </form>';
+                echo '<button onclick="openModal(' . $message["id_message"] . ', \'' . addslashes($message["content"]) . '\')">Modifier</button>';
                 
                 // Ajouter un formulaire pour supprimer le message
                 echo '<form action="delete.php" method="POST" style="display:inline;">
@@ -80,13 +77,35 @@ if ($getMessagesInfos->rowCount() > 0) {
         } 
         ?>
     </div>
+    <div id="modal" style="display:none;">
+        <div>
+            <form id="updateForm" action="update.php" method="POST">
+                <input type="hidden" name="id_message" id="modal_id_message">
+                <textarea name="content" id="modal_content"></textarea>
+                <button type="submit">Mettre à jour</button>
+                <button type="button" onclick="closeModal()">Annuler</button>
+            </form>
+        </div>
+    </div>
 
-        <form action="messages.php" method="POST" id="messages-form">
-            <input type="text" name="content" id="content" placeholder="Envoyer un message" autofocus>
-            <input type="hidden" name="token" value="<?= $_SESSION['csrf']; ?>">
-            <input type="submit" value="Envoyer">
-        </form>
+
+    <form action="messages.php" method="POST" id="messages-form">
+        <input type="text" name="content" id="content" placeholder="Envoyer un message" autofocus>
+        <input type="hidden" name="token" value="<?= $_SESSION['csrf']; ?>">
+        <input type="submit" value="Envoyer">
+    </form>
 
     </main>
+    <script>
+        function openModal(id, content) {
+            document.getElementById('modal_id_message').value = id;
+            document.getElementById('modal_content').value = content;
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
